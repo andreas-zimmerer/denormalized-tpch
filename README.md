@@ -1,5 +1,5 @@
-Denormalize TPC-H Tables
-========================
+Denormalized TPC-H
+==================
 
 Sometimes (e.g. for research projects) it's convenient to have a standardized set of data and queries.
 However, it's often the case that you don't want to support `JOIN` for your prototype
