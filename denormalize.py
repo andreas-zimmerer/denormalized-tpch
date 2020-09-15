@@ -116,29 +116,29 @@ print('Joining tables...', end='', flush=True)
 
 nation_region = pd.merge(nation, region,
     left_on=['N_REGIONKEY'],
-    right_on=['R_REGIONKEY'], sort=False, how='left')
+    right_on=['R_REGIONKEY'], sort=False, how='inner')
 customer_nation = pd.merge(customer, nation_region,
     left_on=['C_NATIONKEY'],
-    right_on=['N_NATIONKEY'], sort=False, how='left')
+    right_on=['N_NATIONKEY'], sort=False, how='inner')
 supplier_nation = pd.merge(supplier, nation_region,
     left_on=['S_NATIONKEY'],
-    right_on=['N_NATIONKEY'], sort=False, how='left')
+    right_on=['N_NATIONKEY'], sort=False, how='inner')
 partsupp_part = pd.merge(partsupp, part,
     left_on=['PS_PARTKEY'],
-    right_on=['P_PARTKEY'], sort=False, how='left')
+    right_on=['P_PARTKEY'], sort=False, how='inner')
 partsupp_part_supp = pd.merge(partsupp_part, supplier_nation,
     left_on=['PS_SUPPKEY'],
-    right_on=['S_SUPPKEY'], sort=False, how='left')
+    right_on=['S_SUPPKEY'], sort=False, how='inner')
 orders_customer = pd.merge(orders, customer_nation,
     left_on=['O_CUSTKEY'],
-    right_on=['C_CUSTKEY'], sort=False, how='left')
+    right_on=['C_CUSTKEY'], sort=False, how='inner')
 lineitem_orders = pd.merge(lineitem, orders_customer,
     left_on=['L_ORDERKEY'],
-    right_on=['O_ORDERKEY'], sort=False, how='left')
+    right_on=['O_ORDERKEY'], sort=False, how='inner')
 lineitem_orders_partsupp = pd.merge(lineitem_orders, partsupp_part_supp,
     left_on=['L_PARTKEY', 'L_SUPPKEY'],
     right_on=['PS_PARTKEY', 'PS_SUPPKEY'],
-    sort=False, how='left', suffixes=('_CUST', '_SUPP'))
+    sort=False, how='inner', suffixes=('_CUST', '_SUPP'))
 
 print(' [done]')
 
